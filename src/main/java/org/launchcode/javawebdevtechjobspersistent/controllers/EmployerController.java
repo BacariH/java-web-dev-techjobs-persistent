@@ -16,7 +16,7 @@ import java.util.Optional;
 public class EmployerController {
 
     @Autowired
-    private EmployerRepository employerRepository;
+    EmployerRepository employerRepository;
 
 
     public String displayIndex(){
@@ -38,7 +38,7 @@ public class EmployerController {
         }
 
         employerRepository.save(newEmployer);
-        return "redirect:";
+        return "redirect:../add";
     }
 
     @GetMapping("view/{employerId}")
