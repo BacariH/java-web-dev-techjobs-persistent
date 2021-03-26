@@ -19,8 +19,10 @@ public class EmployerController {
     EmployerRepository employerRepository;
 
 
-    public String displayIndex(){
-        return "/index";
+    @GetMapping("")
+    public String displayIndex(Model model){
+        model.addAttribute("employers",employerRepository.findAll());
+        return "employers/index";
     }
 
     @GetMapping("add")
@@ -38,7 +40,7 @@ public class EmployerController {
         }
 
         employerRepository.save(newEmployer);
-        return "redirect:../add";
+        return "redirect:";
     }
 
     @GetMapping("view/{employerId}")

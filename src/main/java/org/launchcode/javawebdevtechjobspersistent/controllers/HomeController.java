@@ -4,6 +4,7 @@ import org.launchcode.javawebdevtechjobspersistent.models.Employer;
 import org.launchcode.javawebdevtechjobspersistent.models.Job;
 import org.launchcode.javawebdevtechjobspersistent.models.Skill;
 import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
+import org.launchcode.javawebdevtechjobspersistent.models.data.JobRepository;
 import org.launchcode.javawebdevtechjobspersistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,8 @@ public class HomeController {
     @Autowired
     private SkillRepository skillRepository;
 
+    @Autowired
+    private JobRepository jobRepository;
 
 
     @RequestMapping("")
@@ -45,6 +48,12 @@ public class HomeController {
         Iterable<Employer> employers;
         employers = employerRepository.findAll();
         model.addAttribute("employers", employers);
+
+
+        Iterable<Skill> skills;
+        skills = skillRepository.findAll();
+        model.addAttribute("skills", skills);
+
         return "add";
     }
 
@@ -61,16 +70,18 @@ public class HomeController {
         newJob.setEmployer(employer);
 
 
+
         List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
         newJob.setSkills(skillObjs);
 
-        return "redirect:..";
+        jobRepository.save(newJob);
+        return "redirect:";
     }
 
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
 
-
+        model.addAttribute("job", jobId);
 
         return "view";
     }

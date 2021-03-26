@@ -1,5 +1,6 @@
 package org.launchcode.javawebdevtechjobspersistent.controllers;
 
+import org.launchcode.javawebdevtechjobspersistent.models.Employer;
 import org.launchcode.javawebdevtechjobspersistent.models.Job;
 import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
 import org.launchcode.javawebdevtechjobspersistent.models.data.JobRepository;
@@ -31,6 +32,7 @@ public class ListController {
     private JobRepository jobRepository;
 
     static HashMap<String, String> columnChoices = new HashMap<>();
+//    static HashMap<String, Object> tableChoices = new HashMap<>();
 
     public ListController () {
 
